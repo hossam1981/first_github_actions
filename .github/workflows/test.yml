@@ -1,0 +1,28 @@
+
+name: test Project
+
+on:
+  push:
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3 
+
+      - name: Install Node.js
+        run: echo "hi"
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3 
+
+      - name: Install Node.js
+        run: echo "hi deploy"
