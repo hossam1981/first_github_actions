@@ -12,12 +12,12 @@ jobs:
       - name: Get code
         uses: actions/checkout@v3
       - name: install NodeJS
-        uses: action/setup-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: 18
           
       - name: install dependencies 
-        run: npm cli
+        run: npm ci
       - name: run test
         run: npm test
         
