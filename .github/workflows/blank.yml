@@ -1,14 +1,26 @@
 
-name: Hello World
+name: test Project
 
 on:
-  workflow_dispatch:
+  push:
 
 jobs:
-  first_job:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Echo Hello World
-        run: echo "Hello, World!"
+      - name: Get code
+        uses: actions/chechout@v3
+      - name: install NodeJS
+        uses: action/setup-node@v3
+        with:
+          node-version: 18
+          
+      - name: install dependencies 
+        run: npm cli
+      - name: run test
+        run: npm test
+        
+             
+          
 
