@@ -33,7 +33,7 @@ jobs:
         run: echo "Generating report..."
 
   deploy:
-    needs: report
+    needs: [lint, report]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
