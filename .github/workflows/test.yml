@@ -1,4 +1,4 @@
-name: test Project
+name: Learn GitHub Actions
 
 on: [push, workflow_dispatch]
 
@@ -9,16 +9,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run ESLint
-        run: npm run lint
+      - name: Simulate linting
+        run: echo "Running lint..."
 
   test:
     needs: lint
@@ -27,16 +19,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run tests
-        run: npm test
+      - name: Simulate testing
+        run: echo "Running tests..."
 
   report:
     needs: test
@@ -45,16 +29,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Generate report
-        run: npm run report # Replace with your actual report command
+      - name: Simulate report generation
+        run: echo "Generating report..."
 
   deploy:
     needs: report
@@ -63,10 +39,5 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Deploy
-        run: echo "hi deploy"
+      - name: Simulate deployment
+        run: echo "Deploying..."
