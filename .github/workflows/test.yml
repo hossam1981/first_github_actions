@@ -22,8 +22,18 @@ jobs:
       - name: Simulate testing
         run: echo "Running tests..."
 
-  report:
+  build:
     needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Simulate build
+        run: echo "Building the project..."
+
+  report:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -33,7 +43,7 @@ jobs:
         run: echo "Generating report..."
 
   deploy:
-    needs: [lint, report]
+    needs: report
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
