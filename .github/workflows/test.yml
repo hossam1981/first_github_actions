@@ -1,27 +1,72 @@
-
 name: test Project
 
 on: [push, workflow_dispatch]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
 
   test:
+    needs: lint
     runs-on: ubuntu-latest
-
     steps:
-      - name: Get code
-        uses: actions/checkout@v3 
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Install Node.js
-        run: echo "hi"
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-  deploy:
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+  report:
     needs: test
     runs-on: ubuntu-latest
-
     steps:
-      - name: Get code
-        uses: actions/checkout@v3 
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Install Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate report
+        run: npm run report # Replace with your actual report command
+
+  deploy:
+    needs: report
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Deploy
         run: echo "hi deploy"
